@@ -1,8 +1,35 @@
-export class User {
-  constructor($axios) {
-    this.$axios = $axios
+import { $context } from "~/utils/global-accessor";
+
+export interface IUserResponse {
+  "id": number,
+  "name": string,
+  "username": string,
+  "email": string,
+  "address": {
+    "street": string,
+    "suite": string,
+    "city": string,
+    "zipcode": string,
+    "geo": {
+      "lat": string,
+      "lng": string
+    }
+  },
+  "phone": string,
+  "website": string,
+  "company": {
+    "name": string,
+    "catchPhrase": string,
+    "bs": string
   }
-  async getUser() {
-    return this.$axios.$get('https://jsonplaceholder.typicode.com/todos/1')
+}
+
+interface IUser {
+  getUser(): Promise<IUserResponse>
+}
+
+export class User implements IUser{
+  public async getUser() {
+    return $context.$axios.$get<IUserResponse>('https://jsonplaceholder.typicode.com/users/1')
   }
 }

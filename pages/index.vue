@@ -1,5 +1,6 @@
 <template>
 <div>
+  <p>CLASS COMPONENTS</p>
   <div>{{ post.body }}</div>
   <div>{{ user.email }}</div>
 <div>
@@ -12,45 +13,37 @@
 
 <script lang="ts">
 import { Vue, Component } from 'vue-property-decorator'
-import { getModule } from "vuex-module-decorators";
-import UserModule from "~/store/user";
-import PostModule from "~/store/post";
-import CountModule from "~/store/count";
+import { countStore, postStore, userStore } from "~/utils/global-accessor";
 
 @Component({
-  async asyncData(context) {
-   const postStore = getModule(PostModule, context.store);
+  async asyncData() {
    await postStore.fetchPost()
   }
 })
 export default class IndexPage extends Vue {
 
-  private userStore = getModule(UserModule, this.$store);
-  private postStore = getModule(PostModule, this.$store);
-  private countStore = getModule(CountModule, this.$store);
-
-  private async mounted() {
-    await this.userStore.fetchUsers()
+  async mounted() {
+    await userStore.fetchUsers()
   }
 
   get count() {
-    return this.countStore.getCount
+    return countStore.getCount
   }
 
   get post() {
-    return this.postStore.getPost
+    return postStore.getPost
   }
 
   get user () {
-    return this.userStore.getUser
+    return userStore.getUser
   }
 
   public setIncrement() {
-    this.countStore.increment()
+    countStore.increment()
   }
 
   public setDecrement() {
-    this.countStore.decrement()
+    countStore.decrement()
   }
 }
 </script>

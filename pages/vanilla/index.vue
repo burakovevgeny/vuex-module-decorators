@@ -1,5 +1,6 @@
 <template>
   <div>
+    <p>VANILLA</p>
     <div>{{ post.body }}</div>
     <div>{{ user.email }}</div>
     <div>

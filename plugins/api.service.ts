@@ -1,11 +1,29 @@
-import { User, Post } from "@/api";
+import { User, Post } from "~/api";
+import { Plugin } from '@nuxt/types'
 
-export default ({ $axios }, inject) => {
+export interface IApiService {
+  User: User
+  Post: Post
+}
+
+declare module 'vue/types/vue' {
+  interface Vue {
+    $api: IApiService
+  }
+}
+
+declare module '@nuxt/types' {
+  interface Context {
+    $api: IApiService
+  }
+}
+
+const api: Plugin = (_, inject) => {
   class ApiService {
-    constructor() {
-      this.User = new User($axios)
-      this.Post = new Post($axios)
-    }
+    public User = new User()
+    public Post = new Post()
   }
   inject('api', new ApiService());
 }
+
+export default api

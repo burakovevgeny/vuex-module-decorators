@@ -1,5 +1,5 @@
 import { Plugin } from '@nuxt/types'
-import { initializeContext } from '~/api'
+import { initializeContext } from "~/utils/global-accessor";
 
 const nuxtContextAccessor: Plugin = (context) => {
   initializeContext(context)

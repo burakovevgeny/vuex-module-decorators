@@ -4,11 +4,10 @@ import CountModule from "~/store/count";
 import PostModule from "~/store/post";
 import UserModule from "~/store/user";
 
+let $context: Context
 let countStore: CountModule
 let postStore: PostModule
 let userStore: UserModule
-let $context: Context
-
 
 export function initializeContext(context: Context) {
   $context = context
