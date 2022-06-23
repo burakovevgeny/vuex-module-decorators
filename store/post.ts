@@ -10,9 +10,11 @@ import { $context } from "~/utils/global-accessor";
 export default class PostModule extends VuexModule {
   public post = {} as IPostResponse
 
-  @MutationAction({ mutate: ['post'] })
+
+  //the syntactic sugar for action with immediately mutation
+  @MutationAction({ mutate: ['post'], rawError: true })
   public async fetchPost() {
-    const post = await $context.$api.Post.getPost()
+    const post = await $context.$api.post.getPost()
     return { post }
   }
 

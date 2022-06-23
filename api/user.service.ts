@@ -24,11 +24,8 @@ export interface IUserResponse {
   }
 }
 
-interface IUser {
-  getUser(): Promise<IUserResponse>
-}
 
-export class User implements IUser{
+export class User {
   public async getUser() {
     return $context.$axios.$get<IUserResponse>('https://jsonplaceholder.typicode.com/users/1')
   }

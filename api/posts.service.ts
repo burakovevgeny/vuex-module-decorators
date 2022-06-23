@@ -7,11 +7,7 @@ export interface IPostResponse {
   userId: number
 }
 
-interface IPost {
-  getPost(): Promise<IPostResponse>
-}
-
-export class Post implements IPost {
+export class Post {
   async getPost() {
     return $context.$axios.$get<IPostResponse>('https://jsonplaceholder.typicode.com/posts/1')
   }

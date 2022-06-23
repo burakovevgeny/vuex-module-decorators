@@ -2,8 +2,8 @@ import { User, Post } from "~/api";
 import { Plugin } from '@nuxt/types'
 
 export interface IApiService {
-  User: User
-  Post: Post
+  user: User
+  post: Post
 }
 
 declare module 'vue/types/vue' {
@@ -19,9 +19,9 @@ declare module '@nuxt/types' {
 }
 
 const api: Plugin = (_, inject) => {
-  class ApiService {
-    public User = new User()
-    public Post = new Post()
+  class ApiService implements IApiService {
+    public user = new User()
+    public post = new Post()
   }
   inject('api', new ApiService());
 }
