@@ -6,7 +6,7 @@ import { Module, VuexModule, Action, Mutation } from 'vuex-module-decorators'
   namespaced: true,
 })
 export default class CountModule extends VuexModule {
-  count = 0
+  public count = 0
 
   @Action
   public decrement() {
